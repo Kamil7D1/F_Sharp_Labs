@@ -59,13 +59,77 @@ let zad6 = fun (a1, a2, a3)  (b1, b2, b3) ->
 //printfn "Odleglosc euklidesowa pomiedzy dwoma punktami w przestrzeni 3D %A" (zad6 punkt1 punkt2)
 
 let zad7 = fun (srd) (r) (pnkt) ->
-    let srdPnkt = sqrt((fst srd - fst pnkt) * (fst srd - fst pnkt) + (snd srd - snd pnkt) * (snd srd - snd pnkt))
+    let srdPnkt = Math.Sqrt((fst srd - fst pnkt) * (fst srd - fst pnkt) + (snd srd - snd pnkt) * (snd srd - snd pnkt))
     
     match (srdPnkt, r) with
     | srdPnkt, r when srdPnkt > r -> printfn "Punkt poza okregiem. Srednica: %f i Odleglosc %f" r srdPnkt
     | srdPnkt, r when srdPnkt < r -> printfn "Punkt w okregu. Srednica: %f i Odleglosc %f" r srdPnkt
     | _ -> printfn "Punkt na krawedzi"
 
-printfn "zad7 %A" (zad7 (0.0, 0.0) (5.0) (1.0, 1.0))
-printfn "zad7 %A" (zad7 (0.0, 0.0) (5.0) (4.0, 4.0))
-printfn "zad7 %A" (zad7 (0.0, 0.0) (5.0) (5.0, 5.0))
+//printfn "zad7 %A" (zad7 (0.0, 0.0) (5.0) (1.0, 1.0))
+//printfn "zad7 %A" (zad7 (0.0, 0.0) (5.0) (4.0, 4.0))
+//printfn "zad7 %A" (zad7 (0.0, 0.0) (5.0) (5.0, 5.0))
+
+type Ulamek = {
+    licznik: float
+    mianownik: float
+}
+
+//zad8 do powtorki
+
+let zad9 = fun (u1: Ulamek) (u2: Ulamek) (operacja: string) ->
+    match operacja with
+    | "dodawanie" -> printfn "Wynik dodawana ulamkow to: %f" ((u1.licznik + u2.licznik) / (u1.mianownik * u2.mianownik))
+    | "odejmowanie" -> printfn "Wynik odejmowania ulamkow to: %f" (((u1.licznik * u2.mianownik) - (u2.licznik * u1.mianownik)) / (u1.mianownik * u2.mianownik))
+    | "mnozenie" -> printfn "Wynik mnozenia ulamkow to: %f" ((u1.licznik * u2.licznik) / (u1.mianownik * u2.mianownik))
+    | "dzielenie" -> printfn "Wynik dzielenia ulamkow to: %f" ((u1.licznik * u2.mianownik) / (u1.mianownik * u2.licznik))
+    | _ -> printfn "Podana operacja nie istenieje"
+
+//zad9 ({licznik = 2.0; mianownik = 2.0}) ({licznik = 2.0; mianownik = 2.0}) "dodawanie"
+//zad9 ({licznik = 2.0; mianownik = 2.0}) ({licznik = 2.0; mianownik = 2.0}) "odejmowanie"
+//zad9 ({licznik = 2.0; mianownik = 2.0}) ({licznik = 2.0; mianownik = 2.0}) "mnozenie"
+//zad9 ({licznik = 2.0; mianownik = 2.0}) ({licznik = 2.0; mianownik = 2.0}) "dzielenie"
+
+type DzienTygodnia =
+    | Poniedzialek
+    | Wtorek
+    | Sroda
+    | Czwartek
+    | Piatek
+    | Sobota
+    | Niedziela
+
+type Data = { Dzien: int; Miesiac: int; Rok: int }
+// zad10
+
+let zad11 = fun (dzielna: float) (dzielnik: float) ->
+    if dzielnik = 0.0 then
+        0.0, false
+    else
+        dzielna / dzielnik, true
+
+//printfn "Wynik dzielenia %A" (zad11 2.0 0.0)
+//printfn "Wynik dzielenia %A" (zad11 2.0 2.0)
+
+let zad13 = fun (a: float) (b: float) (c: float) ->
+    if (a + b > c && a + c > b && c + a > b) then
+        let p = (a + b + c) / 2.0
+        let obwodPole = (a + b + c, Math.Sqrt(p * (p - a) * (p - b) * (p - c)))
+        printfn "Obwod trojkata to: %f ,a pole to: %f" (fst obwodPole) (snd obwodPole)
+    else
+        printfn "Z podanych wartosci nie da sie stowrzyc trojkata"
+
+//zad13 2.0 2.0 2.0
+
+type Wynik = 
+    | DwaRozwiazania of x1:float*x2:float
+    | JednoRozwiazanie of x1:float
+    | ZeroRozwiazan
+
+// let zad14 = fun (a: float) (b: float) (c: float) ->
+//     let delta = b**2.0 - 4.0 * a * c
+//     if delta > 0.0 then
+//         let x1 = (-b + delta) / (2.0 * a)
+//         let x2 = (-b - delta) / (2.0 * a)
+  
+    
