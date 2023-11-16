@@ -111,6 +111,8 @@ let zad11 = fun (dzielna: float) (dzielnik: float) ->
 //printfn "Wynik dzielenia %A" (zad11 2.0 0.0)
 //printfn "Wynik dzielenia %A" (zad11 2.0 2.0)
 
+//zad12
+
 let zad13 = fun (a: float) (b: float) (c: float) ->
     if (a + b > c && a + c > b && c + a > b) then
         let p = (a + b + c) / 2.0
@@ -126,10 +128,4 @@ type Wynik =
     | JednoRozwiazanie of x1:float
     | ZeroRozwiazan
 
-// let zad14 = fun (a: float) (b: float) (c: float) ->
-//     let delta = b**2.0 - 4.0 * a * c
-//     if delta > 0.0 then
-//         let x1 = (-b + delta) / (2.0 * a)
-//         let x2 = (-b - delta) / (2.0 * a)
-  
-    
+//zad14 zad15 zad16
