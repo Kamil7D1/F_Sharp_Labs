@@ -294,13 +294,22 @@ let stos1 = push 1 stosPusty
 let stos2 = push 2 stos1
 
 let (element, nowyStos) = pop stos2
-printfn "Zdjety element: %d" element
+//printfn "Zdjety element: %d" element
 
-let czyPusty = isEmpty nowyStos
-printfn "Stos jest pusty: %b" czyPusty
+//let czyPusty = isEmpty nowyStos
+//printfn "Stos jest pusty: %b" czyPusty
 
 // DRZWA BINARNE
 
 type Drzewo =
     | Puste
-    |  Wezel of float * Drzewo * Drzewo
+    | Wezel of float * Drzewo * Drzewo
+
+let drzewo = Wezel(4.0, Wezel(2.0, Wezel(1.0, Puste, Puste), Wezel(3.0, Puste, Puste)), Wezel(7.0, Puste, Wezel(8.0, Puste, Puste)))
+
+let rec zad20 (tree: Drzewo) : int =
+    match tree with
+    | Puste -> 0
+    | Wezel(_, left, right) -> 1 + zad20 left + zad20 right
+
+printfn "Tyle jest elementow w drzewie: %A" (zad20 drzewo)
