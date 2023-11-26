@@ -289,11 +289,11 @@ let isEmpty (stos: Stos<'a>) : bool =
     | Pusty -> true
     | _ -> false
 
-let stosPusty = Pusty
-let stos1 = push 1 stosPusty
-let stos2 = push 2 stos1
+//let stosPusty = Pusty
+//let stos1 = push 1 stosPusty
+//let stos2 = push 2 stos1
 
-let (element, nowyStos) = pop stos2
+//let (element, nowyStos) = pop stos2
 //printfn "Zdjety element: %d" element
 
 //let czyPusty = isEmpty nowyStos
@@ -303,13 +303,48 @@ let (element, nowyStos) = pop stos2
 
 type Drzewo =
     | Puste
-    | Wezel of float * Drzewo * Drzewo
+    |  Wezel of float * Drzewo * Drzewo
 
 let drzewo = Wezel(4.0, Wezel(2.0, Wezel(1.0, Puste, Puste), Wezel(3.0, Puste, Puste)), Wezel(7.0, Puste, Wezel(8.0, Puste, Puste)))
 
 let rec zad20 (tree: Drzewo) : int =
     match tree with
     | Puste -> 0
-    | Wezel(_, left, right) -> 1 + zad20 left + zad20 right
+    | Wezel(_, left, right) ->
+        1 + zad20 left + zad20 right
 
-printfn "Tyle jest elementow w drzewie: %A" (zad20 drzewo)
+let rec zad21 =
+    function
+    | Puste -> 0.0
+    | Wezel(x, l, r) -> x + (zad21 l) + (zad21 r)   
+
+//printfn "Zadanie 21: %A" (zad21 drzewo)
+
+// let rec zad22 (element: float) (drzewo: Drzewo)  = 
+//     match drzewo with
+//     | Puste -> failwith "Drzewo nie posiada danego elementu."
+//     | Wezel(x, l, p) when x = element -> drzewo
+//     | Wezel(x, l, p) when x <= element -> Wezel(x, l, zad22 element p)
+//     | Wezel(x, l, p) -> Wezel(x,  zad22 element l, p)
+
+let rec zad23 (element: float) (tree: Drzewo) : bool =
+    match tree with
+    | Puste -> false
+    | Wezel(x, l, p) when x = element -> true
+    | Wezel(x, l, p) when x <= element -> zad23 element p
+    | Wezel(x, l, p) -> zad23 element l
+
+let rec zad23v2 (element: float) (tree: Drzewo) : bool =
+    match tree with
+    | Puste -> false
+    | Wezel(x, l, p)  ->
+        if element = x then
+            true
+        elif element < x then 
+            zad23v2 element l
+        else
+            zad23v2 element p 
+
+printfn "Zadanie23: %A" (zad23 4.0 drzewo)
+printfn "Zadanie23: %A" (zad23v2 2.0 drzewo)
+printfn "Zadanie23: %A" (zad23 10.0 drzewo)
